@@ -42,14 +42,14 @@ catch (IOException ex)
 }
 var sortedHeroes = heroes.FindAll(hero => hero.HeroName.StartsWith(prefix)
                                           && hero.DuckStrength >= minDuckPower).OrderBy(hero => -hero.DuckStrength);
-var result =  JsonSerializer.Serialize(sortedHeroes, new JsonSerializerOptions()
+var serializedHeroes = JsonSerializer.Serialize(sortedHeroes, new JsonSerializerOptions()
 {
     WriteIndented = true,
     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
     Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
 });
-Console.WriteLine(result);
-await WriteHeroes(result);
+Console.WriteLine(serializedHeroes);
+await WriteHeroes(serializedHeroes);
 
 static async Task WriteHeroes(string json)
 {
